@@ -1,0 +1,49 @@
+﻿@model List<BookModel>
+
+
+    <div class="container-fluid p-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>PRICE</th>
+                    <th>AUTHOR ID</th>
+                    <th>TAGS</th>
+                    <th>ACTIONS</th>
+                </tr>
+              
+            </thead>
+            <tbody>
+            @foreach(BookModel book in Model)
+            {
+                <tr>
+                    <td>@book.Id</td>
+                    <td>@book.Name</td>
+                    <td>@book.Price</td>
+                    <td>@book.AuthorId</td>
+                    <td>
+                        @foreach(TagModel tag in book.Tags)
+                        {
+                            @tag.Name
+                        }
+                    </td>
+                    <td class="d-flex">
+
+                        
+                        <a asp-action="Update" asp-controller="Book" asp-area="Admin" asp-route-id="@book.Id">
+                            <button type="submit" class="btn btn-warning">Update</button>
+
+                        </a>
+                     
+                        <form class="mx-3" asp-controller="Book" asp-action="Delete" asp-area="Admin" asp-route-id="@book.Id" method="post">
+
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+     
+            </tbody>
+        </table>
+    </div>

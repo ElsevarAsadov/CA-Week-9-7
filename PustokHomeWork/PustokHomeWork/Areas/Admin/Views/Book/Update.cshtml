@@ -1,0 +1,52 @@
+﻿@model BookModel
+
+
+
+<div class="container-fluid p-3">
+
+
+    <form asp-action="UpdateBook" asp-controller="Book" asp-area="Admin" asp-route-id="@Model.Id" method="POST">
+        
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" value="@Model.Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label"></label>
+            <input asp-for="Price" class="form-control" value="@Model.Price">
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="AuthorId" class="form-label"></label>
+            <select asp-for="AuthorId" class="form-control">
+                @foreach(AuthorModel author in ViewBag.Authors)
+                {
+                    <option value="@(author.Id)">@author.Name</option>
+                }
+            </select>
+            <span asp-validation-for="AuthorId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="TagIds" class="form-label"></label>
+            <select asp-for="TagIds" class="form-control">
+
+                @foreach (TagModel tag in ViewBag.Tags)
+                {
+                    <option value="@(tag.Id)">@tag.Name</option>
+                }
+
+            </select>
+            <span asp-validation-for="TagIds" class="text-danger"></span>
+        </div>
+
+        
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>
