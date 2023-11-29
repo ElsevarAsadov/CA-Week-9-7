@@ -1,0 +1,55 @@
+﻿@model List<ProductModel>
+
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">NAME</th>
+            <th scope="col">DESC</th>
+            <th scope="col">Price</th>
+            <th scope="col">SALE F</th>
+            <th scope="col">COLORS</th>
+            <th scope="col">SIZES</th>
+            <th scope="col">ACTIONS</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(ProductModel pro in @Model)
+        {
+            <tr>
+                <td scope="row">@pro.Id</td>
+                <td scope="row">@pro.Name</td>
+                <td scope="row">@pro.Description</td>
+                <td scope="row">@pro.Price</td>
+                <td scope="row">@pro.SaleFraction</td>
+                <td scope="row" class="row m-auto">
+
+                    @foreach(ColorModel color in pro.Colors)
+                    {
+                        <span style="background-color: @(color.Name); width: 15px; height: 15px" class="mr-2"></span>
+                    }
+
+                </td>
+                <td scope="row">
+                    @foreach(SizeModel size in pro.Sizes)
+                    {
+                        <p>@size.Size</p>
+                    }
+                </td>
+                <td class="row">
+                    <a asp-controller="Product" asp-action="Update" asp-area="Admin" asp-route-id="@pro.Id" class="btn btn-warning mr-4">UPDATE</a>
+                    <form asp-asp-controller="Product" asp-action="Delete" asp-area="Admin"  asp-route-id="@pro.Id"  method="POST">
+                        <button class="btn btn-danger">DELETE</button>
+                    </form>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
